@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>數位互動教材建置技術文件</title>
+  <meta name="description" content="國小自然數位互動教材的需求討論、RWD 建置、Canvas 動畫、資料圖表、GitHub Pages 發布與維護流程。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="topbar" aria-label="技術文件導覽">
+      <a href="#review">複盤</a>
+      <a href="#workflow">流程</a>
+      <a href="#checks">檢查表</a>
+      <a href="#deliverables">交付</a>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">互動教材工程流程</p>
+        <h1>數位互動教材建置技術文件</h1>
+        <p class="lead">整理本次毛細現象互動教材從需求討論、RWD 版面、Canvas 動畫、資料圖表、GitHub Pages 發布到後續修正的完整建置流程。</p>
+      </div>
+      <div class="hero-panel" aria-label="流程摘要">
+        <div class="pipeline-step is-active">需求釐清</div>
+        <div class="pipeline-step">教學設計</div>
+        <div class="pipeline-step">互動實作</div>
+        <div class="pipeline-step">驗證發布</div>
+        <div class="pipeline-step">收工更新</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="review" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Retrospective</p>
+        <h2>本次建置複盤</h2>
+      </div>
+      <div class="cards three">
+        <article class="card">
+          <h3>有效做法</h3>
+          <ul>
+            <li>先確認年級、使用情境、是否需要數據輸入與 GitHub Pages。</li>
+            <li>用分頁式 RWD 結構承載觀察、實驗、圖表、原理、生活應用與測驗。</li>
+            <li>以 JavaScript canvas 取代靜態圖片，讓科學現象能被動態觀察。</li>
+            <li>每次小修正後立即做文字搜尋、語法檢查與線上驗證。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>主要問題</h3>
+          <ul>
+            <li>同一專案可能同時存在工作區與指定 Google Drive 資料夾，容易改錯檔案。</li>
+            <li>隱藏分頁內的 canvas 可能因尺寸尚未確定而空白。</li>
+            <li>「不要捲軸」必須用實際 viewport 測量，不能只靠目測。</li>
+            <li>GitHub Pages 與社群連結預覽會快取，需要 cache-busting 與 metadata 搜尋。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>流程改進</h3>
+          <ul>
+            <li>開工先鎖定 authoritative folder，所有 patch、測試、git 操作都在同一資料夾。</li>
+            <li>把可重用規則寫進 skill，把詳細複盤放到技術文件網頁。</li>
+            <li>將檢查項目固定化：語法、文字、RWD、canvas、互動、部署。</li>
+            <li>每次推送後用 query string 驗證 HTML、CSS、JS 都是新版。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="section band">
+      <div class="section-heading">
+        <p class="eyebrow">Workflow</p>
+        <h2>高效率建置流程</h2>
+      </div>
+      <div class="timeline">
+        <article>
+          <span>1</span>
+          <div>
+            <h3>需求盤點</h3>
+            <p>確認年級、單元、學生使用方式、教學來源、互動需求、指定資料夾、GitHub 帳號與 repository 名稱。</p>
+          </div>
+        </article>
+        <article>
+          <span>2</span>
+          <div>
+            <h3>教學設計 brief</h3>
+            <p>先提出目標、分頁架構、核心操作、資料圖表、RWD 策略與投影使用方式，再取得確認。</p>
+          </div>
+        </article>
+        <article>
+          <span>3</span>
+          <div>
+            <h3>靜態網站實作</h3>
+            <p>以 `index.html`、`styles.css`、`script.js`、`README.md`、`.nojekyll` 建置，除非明確需要框架。</p>
+          </div>
+        </article>
+        <article>
+          <span>4</span>
+          <div>
+            <h3>互動與動畫</h3>
+            <p>數值條件使用 slider，對照實驗並排呈現，生活應用採左側工具列與右側大型 canvas/文字說明。</p>
+          </div>
+        </article>
+        <article>
+          <span>5</span>
+          <div>
+            <h3>驗證與修正</h3>
+            <p>檢查語法、舊文字、單位、RWD、canvas 首幀、互動流程、圖表結果與無捲軸需求。</p>
+          </div>
+        </article>
+        <article>
+          <span>6</span>
+          <div>
+            <h3>發布與收工</h3>
+            <p>提交、推送、確認 GitHub Pages，最後把本次可重用經驗更新回 skill。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Architecture</p>
+        <h2>建議網站架構</h2>
+      </div>
+      <div class="matrix">
+        <article>
+          <h3>觀察站</h3>
+          <p>導入生活現象與探究問題，提供學生可理解的第一個觀察任務。</p>
+        </article>
+        <article>
+          <h3>互動實驗室</h3>
+          <p>使用 slider 調整條件，並排比較結果，動畫逐步上升或變化。</p>
+        </article>
+        <article>
+          <h3>我的圖表</h3>
+          <p>學生輸入自己的實驗數據，產生圖表、最大值判讀與結論句。</p>
+        </article>
+        <article>
+          <h3>原理小教室</h3>
+          <p>用 canvas 小動畫呈現粒子、孔隙、吸附或水分移動等概念。</p>
+        </article>
+        <article>
+          <h3>生活中的應用</h3>
+          <p>至少六個例子，左側選單加圖示，右側提供大型動畫與短說明。</p>
+        </article>
+        <article>
+          <h3>挑戰測驗</h3>
+          <p>題數依需求調整，回饋要能連回實驗變因與生活應用。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="checks" class="section band">
+      <div class="section-heading">
+        <p class="eyebrow">Quality Gate</p>
+        <h2>驗證檢查表</h2>
+      </div>
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> 已確認正確資料夾與 Git repo。</label>
+        <label><input type="checkbox"> `node --check script.js` 通過。</label>
+        <label><input type="checkbox"> 已搜尋舊年級、舊單位、移除的分頁與 footer 文字。</label>
+        <label><input type="checkbox"> Canvas 在分頁切換後可重繪，且首幀不是空白。</label>
+        <label><input type="checkbox"> 無捲軸需求已用實際 viewport 測量。</label>
+        <label><input type="checkbox"> GitHub Pages 已用 cache-busting query string 驗證。</label>
+      </div>
+      <p class="check-count" id="checkCount">完成 0 / 6 項</p>
+    </section>
+
+    <section id="deliverables" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Deliverables</p>
+        <h2>交付物與維護規則</h2>
+      </div>
+      <div class="cards two">
+        <article class="card">
+          <h3>標準交付檔案</h3>
+          <ul>
+            <li>`index.html`：頁面結構、SEO 與分享 metadata。</li>
+            <li>`styles.css`：RWD、分頁狀態、無捲軸壓縮規則。</li>
+            <li>`script.js`：互動、圖表、canvas、測驗與狀態更新。</li>
+            <li>`README.md`：教材用途、部署與維護摘要。</li>
+            <li>`.nojekyll`：GitHub Pages 靜態站設定。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>維護原則</h3>
+          <ul>
+            <li>每次改動都先確認是否需要同步 HTML、CSS、JS、README 與 metadata。</li>
+            <li>單位、年級、標題與公開分享文字必須一起搜尋替換。</li>
+            <li>移除功能時，同步移除 dead HTML/CSS/JS。</li>
+            <li>部署後等 Pages 更新，再驗證線上實際內容。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>數位互動教材建置技術文件</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
