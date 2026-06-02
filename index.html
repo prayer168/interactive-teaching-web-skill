@@ -15,6 +15,7 @@
     <nav class="topbar" aria-label="技術文件導覽">
       <a href="#review">複盤</a>
       <a href="#workflow">流程</a>
+      <a href="#pitfalls">踩坑</a>
       <a href="#checks">檢查表</a>
       <a href="#deliverables">交付</a>
     </nav>
@@ -117,6 +118,79 @@
           <div>
             <h3>發布與收工</h3>
             <p>提交、推送、確認 GitHub Pages，最後把本次可重用經驗更新回 skill。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Pitfalls</p>
+        <h2>踩過的坑與解法</h2>
+      </div>
+      <div class="pitfall-list">
+        <article>
+          <div class="pitfall-mark">01</div>
+          <div>
+            <h3>同一教材有多個資料夾版本，容易改錯檔案</h3>
+            <p>問題：工作區與指定的 Google Drive 資料夾同時存在相似檔案，若直接依目前 cwd 修改，可能會更新到非正式版本。</p>
+            <p>解法：開工先用 `Get-ChildItem`、`git status`、檔案時間與遠端 URL 確認 authoritative folder。所有 patch、測試、commit、push 都固定在同一個資料夾。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">02</div>
+          <div>
+            <h3>Canvas 在隱藏分頁裡會空白</h3>
+            <p>問題：分頁尚未顯示時 canvas 的實際尺寸可能是 0，或動畫只在初次載入時繪製，切換分頁後畫面看起來是空白。</p>
+            <p>解法：先畫可見首幀，再使用 `requestAnimationFrame`。分頁切換、resize 後都要重新讀取尺寸並 redraw，必要時加 `setTimeout` 做第二次補繪。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">03</div>
+          <div>
+            <h3>「不要用到捲軸」不能只靠縮小字體</h3>
+            <p>問題：某些 viewport 看似排得下，但底部仍超出畫面；如果全站一起縮小，其他頁面可讀性會變差。</p>
+            <p>解法：只針對 active tab 加 compact CSS，例如 `body[data-active-tab="lab"]`。用瀏覽器量測 `scrollHeight`、`innerHeight` 與面板高度，再調整 gap、padding、卡片高度與 grid 比例。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">04</div>
+          <div>
+            <h3>單位或年級改了，但舊文字殘留在其他地方</h3>
+            <p>問題：把 mL 改成 cm、三年級改成四年級時，畫面文字可能改了，但圖表標籤、測驗回饋、README、meta description 或分享預覽仍是舊內容。</p>
+            <p>解法：每次改單位、年級、標題都要全域搜尋舊字串，至少檢查 HTML、CSS、JS、README、Open Graph 與 Twitter metadata。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">05</div>
+          <div>
+            <h3>GitHub Pages 與社群預覽會快取舊版</h3>
+            <p>問題：GitHub 已 push 成功，但 Pages 還沒部署完成，或 LINE、社群平台仍顯示舊標題與舊年級。</p>
+            <p>解法：部署後等待 Pages 回傳 200，再用 `?v=commit` 驗證 HTML/CSS/JS。分享預覽要更新 `og:title`、`og:description`、`twitter:*`，並告知平台快取可能需要重新貼或等待。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">06</div>
+          <div>
+            <h3>遠端 repo 有新提交，push 會被拒絕</h3>
+            <p>問題：同一 repo 從不同資料夾或不同時間推送，遠端比本地多提交時會出現 rejected。</p>
+            <p>解法：先 `git pull --rebase` 或 fetch 後檢查差異，保留雙方修改再推送。不要用 reset 覆蓋遠端，尤其教材資料夾常同時有逐字稿、字幕與未追蹤檔。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">07</div>
+          <div>
+            <h3>巢狀 Git repo 可能被 Git 判定為 dubious ownership</h3>
+            <p>問題：在沙盒或不同 Windows 使用者下初始化 repo 後，GitHub CLI 可能說目前目錄不是可安全操作的 repo。</p>
+            <p>解法：確認路徑正確後，對該資料夾加入 `git config --global --add safe.directory <path>`，再建立 remote、push 與啟用 Pages。</p>
+          </div>
+        </article>
+        <article>
+          <div class="pitfall-mark">08</div>
+          <div>
+            <h3>一次提交混入太多無關變更</h3>
+            <p>問題：教材製作過程常同時改版面、文案、動畫、metadata 與 README，若沒有分清楚，後續追蹤問題會困難。</p>
+            <p>解法：每次提交前看 `git diff --stat` 與 `git status`，只 stage 相關網站檔案。逐字稿、原始素材、未整理檔案先保留為未追蹤，除非明確需要納入 repo。</p>
           </div>
         </article>
       </div>

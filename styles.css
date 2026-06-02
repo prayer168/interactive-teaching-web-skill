@@ -217,6 +217,44 @@ ul {
   font-weight: 700;
 }
 
+.pitfall-list {
+  display: grid;
+  gap: 16px;
+}
+
+.pitfall-list article {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 18px;
+  padding: clamp(18px, 3vw, 28px);
+  background: rgba(255, 255, 255, .9);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.pitfall-mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: white;
+  background: var(--deep);
+  font-weight: 900;
+}
+
+.pitfall-list p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.pitfall-list p:last-child {
+  margin-bottom: 0;
+}
+
 .matrix {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -296,6 +334,10 @@ footer {
   }
 
   .timeline article {
+    grid-template-columns: 1fr;
+  }
+
+  .pitfall-list article {
     grid-template-columns: 1fr;
   }
 }
