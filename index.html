@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>數位互動教材建置技術文件</title>
-  <meta name="description" content="國小自然數位互動教材的需求討論、RWD 建置、Canvas 動畫、資料圖表、GitHub Pages 發布與維護流程。">
+  <title>毛細現象互動教材製作技術文件</title>
+  <meta name="description" content="毛細現象互動教材從需求討論、教學設計、RWD 網頁、Canvas 動畫、資料圖表、GitHub Pages 部署到踩坑解法的技術文件。">
+  <meta property="og:title" content="毛細現象互動教材製作技術文件">
+  <meta property="og:description" content="整理毛細現象互動教材製作流程、實作架構、踩坑解法與部署檢查表。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prayer168.github.io/interactive-teaching-web-skill/">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -13,60 +18,60 @@
 <body>
   <header class="hero">
     <nav class="topbar" aria-label="技術文件導覽">
-      <a href="#review">複盤</a>
+      <a href="#overview">總覽</a>
       <a href="#workflow">流程</a>
+      <a href="#architecture">架構</a>
       <a href="#pitfalls">踩坑</a>
       <a href="#checks">檢查表</a>
-      <a href="#deliverables">交付</a>
     </nav>
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">互動教材工程流程</p>
-        <h1>數位互動教材建置技術文件</h1>
-        <p class="lead">整理本次毛細現象互動教材從需求討論、RWD 版面、Canvas 動畫、資料圖表、GitHub Pages 發布到後續修正的完整建置流程。</p>
+        <p class="eyebrow">Capillary Action Lesson Build Log</p>
+        <h1>毛細現象互動教材製作技術文件</h1>
+        <p class="lead">這份文件整理本次國小自然「毛細現象」互動教材的完整製作流程：從教學需求釐清、分頁式 RWD 設計、學生數據圖表、JavaScript Canvas 動畫，到 GitHub Pages 部署與修正過程中踩過的坑。</p>
       </div>
       <div class="hero-panel" aria-label="流程摘要">
         <div class="pipeline-step is-active">需求釐清</div>
-        <div class="pipeline-step">教學設計</div>
+        <div class="pipeline-step">教材架構</div>
         <div class="pipeline-step">互動實作</div>
-        <div class="pipeline-step">驗證發布</div>
-        <div class="pipeline-step">收工更新</div>
+        <div class="pipeline-step">測試發布</div>
+        <div class="pipeline-step">流程沉澱</div>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="review" class="section">
+    <section id="overview" class="section">
       <div class="section-heading">
-        <p class="eyebrow">Retrospective</p>
-        <h2>本次建置複盤</h2>
+        <p class="eyebrow">Overview</p>
+        <h2>專案總覽</h2>
       </div>
       <div class="cards three">
         <article class="card">
-          <h3>有效做法</h3>
+          <h3>教材定位</h3>
           <ul>
-            <li>先確認年級、使用情境、是否需要數據輸入與 GitHub Pages。</li>
-            <li>用分頁式 RWD 結構承載觀察、實驗、圖表、原理、生活應用與測驗。</li>
-            <li>以 JavaScript canvas 取代靜態圖片，讓科學現象能被動態觀察。</li>
-            <li>每次小修正後立即做文字搜尋、語法檢查與線上驗證。</li>
+            <li>對象：國小四年級自然領域學生。</li>
+            <li>主題：毛細現象的觀察、探究、資料判讀與生活應用。</li>
+            <li>使用方式：學生自主操作為主，也可供教師投影示範。</li>
+            <li>型態：RWD 靜態網站，部署到 GitHub Pages。</li>
           </ul>
         </article>
         <article class="card">
-          <h3>主要問題</h3>
+          <h3>核心功能</h3>
           <ul>
-            <li>同一專案可能同時存在工作區與指定 Google Drive 資料夾，容易改錯檔案。</li>
-            <li>隱藏分頁內的 canvas 可能因尺寸尚未確定而空白。</li>
-            <li>「不要捲軸」必須用實際 viewport 測量，不能只靠目測。</li>
-            <li>GitHub Pages 與社群連結預覽會快取，需要 cache-busting 與 metadata 搜尋。</li>
+            <li>互動實驗室：用 slider 調整層數、寬度、長度與觀察時間。</li>
+            <li>我的圖表：學生輸入實驗數據並產生長條圖與結論句。</li>
+            <li>原理小教室：用 canvas 動畫呈現水分移動、孔隙與吸附概念。</li>
+            <li>生活中的應用：六個生活案例，左側選單、右側動畫與說明。</li>
           </ul>
         </article>
         <article class="card">
-          <h3>流程改進</h3>
+          <h3>技術選擇</h3>
           <ul>
-            <li>開工先鎖定 authoritative folder，所有 patch、測試、git 操作都在同一資料夾。</li>
-            <li>把可重用規則寫進 skill，把詳細複盤放到技術文件網頁。</li>
-            <li>將檢查項目固定化：語法、文字、RWD、canvas、互動、部署。</li>
-            <li>每次推送後用 query string 驗證 HTML、CSS、JS 都是新版。</li>
+            <li>HTML/CSS/JavaScript：維持低維護成本與 GitHub Pages 相容性。</li>
+            <li>Canvas：取代靜態圖片，表現水上升、滲透與擴散過程。</li>
+            <li>CSS active-tab 狀態：針對單一頁面做無捲軸版面壓縮。</li>
+            <li>GitHub Pages：公開分享、版本管理與快速更新。</li>
           </ul>
         </article>
       </div>
@@ -75,50 +80,108 @@
     <section id="workflow" class="section band">
       <div class="section-heading">
         <p class="eyebrow">Workflow</p>
-        <h2>高效率建置流程</h2>
+        <h2>實際製作流程</h2>
       </div>
       <div class="timeline">
         <article>
           <span>1</span>
           <div>
-            <h3>需求盤點</h3>
-            <p>確認年級、單元、學生使用方式、教學來源、互動需求、指定資料夾、GitHub 帳號與 repository 名稱。</p>
+            <h3>需求確認</h3>
+            <p>先確認年級、使用情境、資料輸入需求、網站風格、指定資料夾與 GitHub repo。這一步決定教材不是單純展示頁，而是學生可操作、可輸入數據、可看到動畫回饋的探究工具。</p>
           </div>
         </article>
         <article>
           <span>2</span>
           <div>
-            <h3>教學設計 brief</h3>
-            <p>先提出目標、分頁架構、核心操作、資料圖表、RWD 策略與投影使用方式，再取得確認。</p>
+            <h3>教學資料讀取</h3>
+            <p>參考教學影片、逐字稿與既有範例網站，抽取適合國小學生的概念順序：觀察現象、提出預測、操作變因、記錄數據、解釋結果、連結生活。</p>
           </div>
         </article>
         <article>
           <span>3</span>
           <div>
-            <h3>靜態網站實作</h3>
-            <p>以 `index.html`、`styles.css`、`script.js`、`README.md`、`.nojekyll` 建置，除非明確需要框架。</p>
+            <h3>分頁式資訊架構</h3>
+            <p>建立「觀察站、互動實驗室、我的圖表、原理小教室、生活中的應用、挑戰測驗」等分頁。後續依教師回饋移除不需要的任務或紀錄單，保持畫面簡潔。</p>
           </div>
         </article>
         <article>
           <span>4</span>
           <div>
-            <h3>互動與動畫</h3>
-            <p>數值條件使用 slider，對照實驗並排呈現，生活應用採左側工具列與右側大型 canvas/文字說明。</p>
+            <h3>互動與動畫實作</h3>
+            <p>把紙材比較改為同頁並排顯示，數值條件改成 slider。水位與吸水高度不是瞬間跳到結果，而是 6 到 8 秒逐步上升，讓學生看見過程。</p>
           </div>
         </article>
         <article>
           <span>5</span>
           <div>
-            <h3>驗證與修正</h3>
-            <p>檢查語法、舊文字、單位、RWD、canvas 首幀、互動流程、圖表結果與無捲軸需求。</p>
+            <h3>資料圖表與測驗</h3>
+            <p>將學生輸入的實驗數據轉為長條圖，單位統一為 cm。測驗題從六題擴充到八題，讓題目連結紙材、層數、寬度、毛細現象原理與生活應用。</p>
           </div>
         </article>
         <article>
           <span>6</span>
           <div>
-            <h3>發布與收工</h3>
-            <p>提交、推送、確認 GitHub Pages，最後把本次可重用經驗更新回 skill。</p>
+            <h3>部署與流程沉澱</h3>
+            <p>發布到 GitHub Pages 後，持續依畫面截圖與實際瀏覽器狀態修正。最後把製作經驗整理成 `SKILL.md` 與這份技術文件，方便下次教材建置直接套用。</p>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Architecture</p>
+        <h2>網站架構與實作重點</h2>
+      </div>
+      <div class="matrix">
+        <article>
+          <h3>觀察站</h3>
+          <p>用生活情境引入問題，讓學生先想「水為什麼會往上跑」。畫面重點是短句、清楚圖像與可立即進入實驗。</p>
+        </article>
+        <article>
+          <h3>互動實驗室</h3>
+          <p>核心模擬區。衛生紙與廚房紙巾並排比較，條件使用 slider，結果以動畫逐步上升並同步更新 cm 數值。</p>
+        </article>
+        <article>
+          <h3>我的圖表</h3>
+          <p>學生輸入各材料的吸水高度，系統產生長條圖、最大值判讀與提示語。圖表標籤與結論句統一使用 cm。</p>
+        </article>
+        <article>
+          <h3>原理小教室</h3>
+          <p>三個概念區塊加入 canvas 動畫，避免只用文字說明。每個 canvas 都需要首幀、分頁切換 redraw 與 resize redraw。</p>
+        </article>
+        <article>
+          <h3>生活中的應用</h3>
+          <p>至少六個例子：抹布吸水、植物輸水、紙巾擴散、蠟燭燈芯、土壤保水、吸管花實驗。左側選單加入 Emoji 並置中。</p>
+        </article>
+        <article>
+          <h3>挑戰測驗</h3>
+          <p>八題測驗檢查概念理解。回饋文字要明確指出原因，例如紙材孔隙、寬度、層數或時間如何影響水移動。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div class="section-heading">
+        <p class="eyebrow">Implementation Decisions</p>
+        <h2>關鍵實作決策</h2>
+      </div>
+      <div class="cards two">
+        <article class="card">
+          <h3>為什麼不用大量圖片</h3>
+          <ul>
+            <li>本教材需要呈現「過程」，靜態圖無法表達水逐步上升。</li>
+            <li>Canvas 可以依學生調整的參數即時改變高度、速度與圖像。</li>
+            <li>減少外部圖片依賴，部署到 GitHub Pages 時更穩定。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>為什麼用一頁式實驗室</h3>
+          <ul>
+            <li>教師投影與學生平板操作時，捲動會打斷觀察流程。</li>
+            <li>把控制區與結果區同時放在畫面內，學生能直接比較變因與結果。</li>
+            <li>使用 active-tab CSS 只壓縮實驗室，不影響其他頁的閱讀性。</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -132,99 +195,50 @@
         <article>
           <div class="pitfall-mark">01</div>
           <div>
-            <h3>同一教材有多個資料夾版本，容易改錯檔案</h3>
-            <p>問題：工作區與指定的 Google Drive 資料夾同時存在相似檔案，若直接依目前 cwd 修改，可能會更新到非正式版本。</p>
-            <p>解法：開工先用 `Get-ChildItem`、`git status`、檔案時間與遠端 URL 確認 authoritative folder。所有 patch、測試、commit、push 都固定在同一個資料夾。</p>
+            <h3>改錯資料夾</h3>
+            <p>問題：工作區與 Google Drive 指定資料夾都有相似檔案，若沒有先確認 authoritative folder，很容易修改到非正式版本。</p>
+            <p>解法：每次開工先查 `git status`、remote URL、檔案時間與教師指定路徑。所有 patch、測試、commit、push 都固定在正確資料夾。</p>
           </div>
         </article>
         <article>
           <div class="pitfall-mark">02</div>
           <div>
-            <h3>Canvas 在隱藏分頁裡會空白</h3>
-            <p>問題：分頁尚未顯示時 canvas 的實際尺寸可能是 0，或動畫只在初次載入時繪製，切換分頁後畫面看起來是空白。</p>
-            <p>解法：先畫可見首幀，再使用 `requestAnimationFrame`。分頁切換、resize 後都要重新讀取尺寸並 redraw，必要時加 `setTimeout` 做第二次補繪。</p>
+            <h3>Canvas 空白</h3>
+            <p>問題：Canvas 放在隱藏分頁時，尺寸可能尚未穩定，切換頁面後看起來沒有動畫。</p>
+            <p>解法：先畫首幀，再啟動動畫；分頁切換與 resize 後重新讀取尺寸並 redraw，必要時延遲補繪一次。</p>
           </div>
         </article>
         <article>
           <div class="pitfall-mark">03</div>
           <div>
-            <h3>「不要用到捲軸」不能只靠縮小字體</h3>
-            <p>問題：某些 viewport 看似排得下，但底部仍超出畫面；如果全站一起縮小，其他頁面可讀性會變差。</p>
-            <p>解法：只針對 active tab 加 compact CSS，例如 `body[data-active-tab="lab"]`。用瀏覽器量測 `scrollHeight`、`innerHeight` 與面板高度，再調整 gap、padding、卡片高度與 grid 比例。</p>
+            <h3>無捲軸版面仍然超出</h3>
+            <p>問題：看起來已經壓縮，但在特定瀏覽器高度下底部仍超出。</p>
+            <p>解法：用實際 viewport 量測 `scrollHeight` 與 `innerHeight`。只針對實驗室 active tab 調整 gap、padding、杯子高度與左右比例。</p>
           </div>
         </article>
         <article>
           <div class="pitfall-mark">04</div>
           <div>
-            <h3>單位或年級改了，但舊文字殘留在其他地方</h3>
-            <p>問題：把 mL 改成 cm、三年級改成四年級時，畫面文字可能改了，但圖表標籤、測驗回饋、README、meta description 或分享預覽仍是舊內容。</p>
-            <p>解法：每次改單位、年級、標題都要全域搜尋舊字串，至少檢查 HTML、CSS、JS、README、Open Graph 與 Twitter metadata。</p>
+            <h3>單位與年級殘留</h3>
+            <p>問題：mL 改成 cm、三年級改成四年級時，容易漏掉圖表、測驗、README 或分享 metadata。</p>
+            <p>解法：針對舊單位、舊年級、舊標題做全域搜尋，HTML、CSS、JS、README、Open Graph 與 Twitter metadata 都要檢查。</p>
           </div>
         </article>
         <article>
           <div class="pitfall-mark">05</div>
           <div>
-            <h3>GitHub Pages 與社群預覽會快取舊版</h3>
-            <p>問題：GitHub 已 push 成功，但 Pages 還沒部署完成，或 LINE、社群平台仍顯示舊標題與舊年級。</p>
-            <p>解法：部署後等待 Pages 回傳 200，再用 `?v=commit` 驗證 HTML/CSS/JS。分享預覽要更新 `og:title`、`og:description`、`twitter:*`，並告知平台快取可能需要重新貼或等待。</p>
+            <h3>GitHub Pages 快取</h3>
+            <p>問題：push 成功不等於 Pages 立即更新，社群預覽也可能顯示舊資訊。</p>
+            <p>解法：用 `?v=commit` 驗證線上 HTML/CSS/JS 是否已更新。分享資訊要同步更新 meta tags，並提醒第三方平台可能需要等待。</p>
           </div>
         </article>
         <article>
           <div class="pitfall-mark">06</div>
           <div>
-            <h3>遠端 repo 有新提交，push 會被拒絕</h3>
-            <p>問題：同一 repo 從不同資料夾或不同時間推送，遠端比本地多提交時會出現 rejected。</p>
-            <p>解法：先 `git pull --rebase` 或 fetch 後檢查差異，保留雙方修改再推送。不要用 reset 覆蓋遠端，尤其教材資料夾常同時有逐字稿、字幕與未追蹤檔。</p>
+            <h3>Git 推送衝突</h3>
+            <p>問題：同一 repo 從不同位置推送，遠端已有新提交時會 push rejected。</p>
+            <p>解法：先 fetch 或 pull --rebase，確認差異後再推送。不要用 reset 覆蓋教師資料或遠端版本。</p>
           </div>
-        </article>
-        <article>
-          <div class="pitfall-mark">07</div>
-          <div>
-            <h3>巢狀 Git repo 可能被 Git 判定為 dubious ownership</h3>
-            <p>問題：在沙盒或不同 Windows 使用者下初始化 repo 後，GitHub CLI 可能說目前目錄不是可安全操作的 repo。</p>
-            <p>解法：確認路徑正確後，對該資料夾加入 `git config --global --add safe.directory <path>`，再建立 remote、push 與啟用 Pages。</p>
-          </div>
-        </article>
-        <article>
-          <div class="pitfall-mark">08</div>
-          <div>
-            <h3>一次提交混入太多無關變更</h3>
-            <p>問題：教材製作過程常同時改版面、文案、動畫、metadata 與 README，若沒有分清楚，後續追蹤問題會困難。</p>
-            <p>解法：每次提交前看 `git diff --stat` 與 `git status`，只 stage 相關網站檔案。逐字稿、原始素材、未整理檔案先保留為未追蹤，除非明確需要納入 repo。</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Architecture</p>
-        <h2>建議網站架構</h2>
-      </div>
-      <div class="matrix">
-        <article>
-          <h3>觀察站</h3>
-          <p>導入生活現象與探究問題，提供學生可理解的第一個觀察任務。</p>
-        </article>
-        <article>
-          <h3>互動實驗室</h3>
-          <p>使用 slider 調整條件，並排比較結果，動畫逐步上升或變化。</p>
-        </article>
-        <article>
-          <h3>我的圖表</h3>
-          <p>學生輸入自己的實驗數據，產生圖表、最大值判讀與結論句。</p>
-        </article>
-        <article>
-          <h3>原理小教室</h3>
-          <p>用 canvas 小動畫呈現粒子、孔隙、吸附或水分移動等概念。</p>
-        </article>
-        <article>
-          <h3>生活中的應用</h3>
-          <p>至少六個例子，左側選單加圖示，右側提供大型動畫與短說明。</p>
-        </article>
-        <article>
-          <h3>挑戰測驗</h3>
-          <p>題數依需求調整，回饋要能連回實驗變因與生活應用。</p>
         </article>
       </div>
     </section>
@@ -232,14 +246,14 @@
     <section id="checks" class="section band">
       <div class="section-heading">
         <p class="eyebrow">Quality Gate</p>
-        <h2>驗證檢查表</h2>
+        <h2>交付前檢查表</h2>
       </div>
       <div class="checklist" id="checklist">
-        <label><input type="checkbox"> 已確認正確資料夾與 Git repo。</label>
+        <label><input type="checkbox"> 已確認正確教材資料夾與 Git remote。</label>
         <label><input type="checkbox"> `node --check script.js` 通過。</label>
-        <label><input type="checkbox"> 已搜尋舊年級、舊單位、移除的分頁與 footer 文字。</label>
-        <label><input type="checkbox"> Canvas 在分頁切換後可重繪，且首幀不是空白。</label>
-        <label><input type="checkbox"> 無捲軸需求已用實際 viewport 測量。</label>
+        <label><input type="checkbox"> 已搜尋舊年級、舊單位、移除分頁與 footer 文字。</label>
+        <label><input type="checkbox"> Canvas 分頁首幀、切換 redraw 與 resize redraw 正常。</label>
+        <label><input type="checkbox"> 互動實驗室在指定 viewport 不產生捲軸。</label>
         <label><input type="checkbox"> GitHub Pages 已用 cache-busting query string 驗證。</label>
       </div>
       <p class="check-count" id="checkCount">完成 0 / 6 項</p>
@@ -248,26 +262,23 @@
     <section id="deliverables" class="section">
       <div class="section-heading">
         <p class="eyebrow">Deliverables</p>
-        <h2>交付物與維護規則</h2>
+        <h2>交付與後續維護</h2>
       </div>
       <div class="cards two">
         <article class="card">
-          <h3>標準交付檔案</h3>
+          <h3>標準交付內容</h3>
           <ul>
-            <li>`index.html`：頁面結構、SEO 與分享 metadata。</li>
-            <li>`styles.css`：RWD、分頁狀態、無捲軸壓縮規則。</li>
-            <li>`script.js`：互動、圖表、canvas、測驗與狀態更新。</li>
-            <li>`README.md`：教材用途、部署與維護摘要。</li>
-            <li>`.nojekyll`：GitHub Pages 靜態站設定。</li>
+            <li>教材網站：`index.html`、`styles.css`、`script.js`、`README.md`、`.nojekyll`。</li>
+            <li>線上部署：GitHub repository 與 GitHub Pages URL。</li>
+            <li>流程沉澱：`SKILL.md` 與本技術文件網頁。</li>
           </ul>
         </article>
         <article class="card">
-          <h3>維護原則</h3>
+          <h3>後續維護規則</h3>
           <ul>
-            <li>每次改動都先確認是否需要同步 HTML、CSS、JS、README 與 metadata。</li>
-            <li>單位、年級、標題與公開分享文字必須一起搜尋替換。</li>
-            <li>移除功能時，同步移除 dead HTML/CSS/JS。</li>
-            <li>部署後等 Pages 更新，再驗證線上實際內容。</li>
+            <li>每次新增需求先判斷是局部修正、架構調整或 metadata 更新。</li>
+            <li>視覺修正要用實際瀏覽器與目標 viewport 驗證。</li>
+            <li>每次收工要把可重用經驗更新回 skill，讓下一份教材更快完成。</li>
           </ul>
         </article>
       </div>
@@ -275,7 +286,7 @@
   </main>
 
   <footer>
-    <p>數位互動教材建置技術文件</p>
+    <p>毛細現象互動教材製作技術文件</p>
   </footer>
 
   <script src="script.js"></script>
